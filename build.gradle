@@ -10,6 +10,20 @@ dependencies {
     testCompile("org.assertj:assertj-core:3.11.1")
 }
 
+jacoco {
+    toolVersion = "0.8.7"
+}
+
 test {
     outputs.upToDateWhen { false }
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
 }
